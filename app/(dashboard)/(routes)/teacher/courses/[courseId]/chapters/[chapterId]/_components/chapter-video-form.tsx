@@ -15,7 +15,7 @@ import { Chapter, MuxData } from "@prisma/client";
 import { FileUpload } from "@/components/file-upload";
 
 interface ChapterVideoFormProps {
-  initialData: Chapter & { muxData?: MuxData };
+  initialData: Chapter & { muxData?: MuxData | null };
   courseId: string;
   chapterId: string;
 }
