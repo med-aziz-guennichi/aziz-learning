@@ -38,8 +38,8 @@ export const SidebarRoutes = () => {
   const routes = isTeacherPage ? teacherRoutes : guestRoutes;
   return (
     <div className="flex flex-col w-full">
-      {routes.map((route) => (
-        <Suspense fallback={<Loading />}>
+      {routes.map((route, key) => (
+        <Suspense key={key} fallback={<Loading />}>
           <SidebarItem
             key={route.href}
             icon={route.icon}
