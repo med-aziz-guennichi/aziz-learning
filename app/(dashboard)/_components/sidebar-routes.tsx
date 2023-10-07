@@ -3,6 +3,8 @@
 import { BarChart, Compass, Layout, List } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 const guestRoutes = [
   {
@@ -37,12 +39,14 @@ export const SidebarRoutes = () => {
   return (
     <div className="flex flex-col w-full">
       {routes.map((route) => (
-        <SidebarItem
-          key={route.href}
-          icon={route.icon}
-          label={route.label}
-          href={route.href}
-        />
+        <Suspense fallback={<Loading />}>
+          <SidebarItem
+            key={route.href}
+            icon={route.icon}
+            label={route.label}
+            href={route.href}
+          />
+        </Suspense>
       ))}
     </div>
   );

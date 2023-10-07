@@ -1,7 +1,9 @@
 "use client";
+import { Suspense } from "react";
 import { Sidebar } from "./_components/Sidebar";
 import { Navbar } from "./_components/navbar";
 import { NextUIProvider } from "@nextui-org/react";
+import Loading from "../loading";
 const DashboardLyout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-full">
@@ -12,7 +14,9 @@ const DashboardLyout = ({ children }: { children: React.ReactNode }) => {
         <Sidebar />
       </div>
       <main className="md:pl-56 pt-[80px] h-full">
-        <NextUIProvider>{children}</NextUIProvider>
+        <Suspense fallback={<Loading />}>
+          <NextUIProvider>{children}</NextUIProvider>
+        </Suspense>
       </main>
     </div>
   );
