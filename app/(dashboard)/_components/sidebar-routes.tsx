@@ -5,6 +5,7 @@ import { SidebarItem } from "./sidebar-item";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "@/app/loading";
+import { isAdmin } from "@/lib/teacher";
 
 const guestRoutes = [
   {
@@ -28,6 +29,11 @@ const teacherRoutes = [
     icon: BarChart,
     label: "Analytics",
     href: "/teacher/analytics",
+  },
+  {
+    icon: BarChart,
+    label: "users",
+    href: "/teacher/users",
   },
 ];
 export const SidebarRoutes = () => {
