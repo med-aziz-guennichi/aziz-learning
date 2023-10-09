@@ -8,7 +8,7 @@ import Link from "next/link";
 import { SearchInput } from "./search-input";
 import { isTeacher } from "@/lib/teacher";
 
-export const NavbarRoutes = async () => {
+export const NavbarRoutes = () => {
   const { userId } = useAuth();
 
   const pathname = usePathname();
@@ -32,7 +32,7 @@ export const NavbarRoutes = async () => {
               Exit
             </Button>
           </Link>
-        ) : (await isTeacher(userId)) ? (
+        ) : isTeacher(userId) ? (
           <Link href="/teacher/courses">
             <Button size="sm" variant="ghost">
               Teacher mode

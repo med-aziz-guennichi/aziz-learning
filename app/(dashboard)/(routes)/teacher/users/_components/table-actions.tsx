@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -19,11 +20,30 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
-async function TableActions({ user }: any) {
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/all-instructors`
-  );
-  const instructoId = response.data.map((instructor: any) => instructor.userId);
+import { useEffect, useState } from "react";
+function TableActions({ user }: any) {
+  const [data, setData] = useState([]);
+  // const response = await axios.get(
+  //   `${process.env.NEXT_PUBLIC_API_URL}/all-instructors`
+  // );
+
+  // const instructoId = response.data.map((instructor: any) => instructor.userId);
+
+  const handleGetInstroctors = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/all-instructors`
+      );
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    handleGetInstroctors();
+  }, []);
+
+  const instructoId = data.map((instructor: any) => instructor.userId);
 
   const handleDelete = async (option: string) => {
     try {
@@ -72,10 +92,10 @@ async function TableActions({ user }: any) {
                 <BadgeIcon />
               </DialogTrigger>
               <TooltipContent>
-                {instructoId.includes(user.id) ? (
+                {instructoId?.includes(user.id) ? (
                   <p>You are an instructor</p>
                 ) : (
-                  <p>Make a instructor</p>
+                  <p>become instructor</p>
                 )}
               </TooltipContent>
             </TooltipTrigger>
